@@ -1,0 +1,63 @@
+openapi: 3.0.1
+info:
+  title: Data API
+  description: API for handling data objects
+  version: 1.0.0
+
+paths:
+  /data:
+    post:
+      summary: Submit data
+      operationId: submitData
+      requestBody:
+        description: Arbitrary JSON object to be submitted
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: "12345"
+
+  /data/{id}:
+    patch:
+      summary: Update data
+      operationId: updateData
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Arbitrary JSON object to update
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdatedDocument'
+
+components:
+  schemas:
+    UpdatedDocument:
+      type: object
+      properties:
+        document:
+          type: object
