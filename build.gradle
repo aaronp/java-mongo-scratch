@@ -1,0 +1,46 @@
+plugins {
+    id 'org.springframework.boot' version '3.1.1'
+    id 'io.spring.dependency-management' version '1.1.0'
+    id 'java'
+    id 'org.openapi.generator' version '6.4.0'
+}
+
+group = 'example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+repositories {
+    mavenCentral()
+}
+
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+openApiGenerate {
+    generatorName = "spring"
+    inputSpec = "${projectDir}/src/main/resources/openapi.yml".toString()
+    outputDir = "${projectDir}/build/generated".toString()
+    apiPackage = "com.example.myapp.api"
+    modelPackage = "com.example.myapp.model"
+    configOptions = [
+            dateLibrary: "java8"
+    ]
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs += "${buildDir}/generated/src/main/java"
+        }
+    }
+}
+
+compileJava.dependsOn tasks.openApiGenerate
