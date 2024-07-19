@@ -30,7 +30,7 @@ dependencies {
     implementation 'org.openapitools:jackson-databind-nullable:0.2.4'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'de.flapdoodle.embed:de.flapdoodle.embed.mongo:4.1.6'
+//    testImplementation 'de.flapdoodle.embed:de.flapdoodle.embed.mongo:4.1.6'
 }
 
 test {
