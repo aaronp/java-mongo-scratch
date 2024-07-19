@@ -1,6 +1,5 @@
 package example;
 
-import example.gen.model.UpdatedDocument;
 // import com.example.myapp.repository.DataRepository;
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +17,11 @@ public class DataService {
         DataEntity dataEntity = new DataEntity();
         dataEntity.setPayload(payload);
 
-        throw new RuntimeException("TODO - saveData");
+//        throw new RuntimeException("TODO - saveData");
         // Document document = new Document(payload);
         // return dataRepository.save(document).getObjectId("_id").toString();
-        return dataRepository.saveData(dataEntity).getId();
+        dataRepository.save(dataEntity).getId();
+        return "TODO - work";
     }
 
     // public UpdatedDocument updateData(String id, Map<String, Object> payload) {

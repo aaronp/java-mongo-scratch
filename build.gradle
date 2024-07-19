@@ -19,8 +19,10 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
     implementation 'org.mongodb:mongodb-driver-sync:5.1.2' 
-    implementation 'org.mongodb:mongodb-driver-core:5.1.2'     
-    
+    implementation 'org.mongodb:mongodb-driver-core:5.1.2'
+
+
+//    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign:4.0.1'
 
     // annotations
     implementation 'jakarta.annotation:jakarta.annotation-api:2.1.1'
@@ -28,7 +30,7 @@ dependencies {
     implementation 'org.openapitools:jackson-databind-nullable:0.2.4'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'de.flapdoodle.embed:de.flapdoodle.embed.mongo:3.5.4'
+    testImplementation 'de.flapdoodle.embed:de.flapdoodle.embed.mongo:4.1.6'
 }
 
 test {
@@ -42,8 +44,9 @@ openApiGenerate {
     apiPackage = "example.gen.api"
     modelPackage = "example.gen.model"
     configOptions = [
+            delegatePattern: "true",
             dateLibrary: "java8",
-            interfaceOnly : "true",
+            interfaceOnly : "false",
             useSpringBoot3 : "true",
             useResponseEntity : "false",
             library: "spring-cloud",
@@ -59,7 +62,7 @@ sourceSets {
     }
 }
 
-compileJava.dependsOn tasks.openApiGenerate
+//compileJava.dependsOn tasks.openApiGenerate
 
 bootJar {
     // mainClassName = 'example.MyApp'

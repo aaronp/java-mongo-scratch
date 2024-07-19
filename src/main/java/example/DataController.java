@@ -11,7 +11,7 @@ import static com.mongodb.client.model.Updates.combine;
 import static com.mongodb.client.model.Updates.set;
 
 @RestController
-@RequestMapping("/api/onboarding")
+@RequestMapping("/data")
 public class DataController {
 
     @Autowired
