@@ -17,7 +17,16 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
-    implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'  
+    implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+    implementation 'org.mongodb:mongodb-driver-sync:5.1.2' 
+    implementation 'org.mongodb:mongodb-driver-core:5.1.2'     
+    
+
+    // annotations
+    implementation 'jakarta.annotation:jakarta.annotation-api:2.1.1'
+    implementation 'io.swagger.core.v3:swagger-annotations:2.2.10'
+    implementation 'org.openapitools:jackson-databind-nullable:0.2.4'
+
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'de.flapdoodle.embed:de.flapdoodle.embed.mongo:3.5.4'
 }
@@ -30,10 +39,15 @@ openApiGenerate {
     generatorName = "spring"
     inputSpec = "${projectDir}/src/main/resources/openapi.yml".toString()
     outputDir = "${projectDir}/build/generated".toString()
-    apiPackage = "com.example.myapp.api"
-    modelPackage = "com.example.myapp.model"
+    apiPackage = "example.gen.api"
+    modelPackage = "example.gen.model"
     configOptions = [
-            dateLibrary: "java8"
+            dateLibrary: "java8",
+            interfaceOnly : "true",
+            useSpringBoot3 : "true",
+            useResponseEntity : "false",
+            library: "spring-cloud",
+            useTags: "true"
     ]
 }
 
@@ -46,3 +60,7 @@ sourceSets {
 }
 
 compileJava.dependsOn tasks.openApiGenerate
+
+bootJar {
+    // mainClassName = 'example.MyApp'
+}
